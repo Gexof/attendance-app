@@ -14,6 +14,10 @@ class QrScanner extends StatefulWidget {
 
 class _QrScannerState extends State<QrScanner> {
   bool isScanCompleted = false;
+  bool isFlashOn = false;
+  bool isFrontCamera = false;
+  MobileScannerController controller = MobileScannerController();
+
   void closeScreen() {
     isScanCompleted = false;
   }
@@ -23,6 +27,33 @@ class _QrScannerState extends State<QrScanner> {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                isFlashOn = !isFlashOn;
+              });
+              controller.toggleTorch();
+            },
+            icon: Icon(
+              Icons.flash_on,
+              color: isFlashOn ? primaryColor : greyColor,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              setState(() {
+                isFrontCamera = !isFrontCamera;
+              });
+              controller.switchCamera();
+            },
+            icon: Icon(
+              Icons.camera_front,
+              color: isFrontCamera ? primaryColor : greyColor,
+            ),
+          ),
+        ],
+        iconTheme: const IconThemeData(color: blackColor),
         centerTitle: true,
         title: const Text(
           'QR Scanner',
@@ -69,9 +100,11 @@ class _QrScannerState extends State<QrScanner> {
               child: Stack(
                 children: [
                   MobileScanner(
-                    onDetect: (barcode) {
+                    controller: controller,
+                    allowDuplicates: true,
+                    onDetect: (barcode, args) {
                       if (!isScanCompleted) {
-                        String code = barcode.raw ?? '---';
+                        String code = barcode.rawValue ?? '---';
                         isScanCompleted = true;
                         Navigator.push(
                           context,
@@ -82,6 +115,7 @@ class _QrScannerState extends State<QrScanner> {
                             ),
                           ),
                         );
+                        print(code);
                       }
                     },
                   ),
