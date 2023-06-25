@@ -38,6 +38,7 @@ class LoginScreen extends StatelessWidget {
                           if (value == '') {
                             return 'Please Provide your Code';
                           }
+                          return null;
                         },
                       ),
                     ),
