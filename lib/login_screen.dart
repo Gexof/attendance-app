@@ -1,5 +1,6 @@
 import 'package:attendance_app/constant/colors.dart';
 import 'package:attendance_app/qr_scanner.dart';
+import 'package:attendance_app/widgets/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -57,8 +58,13 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         // TODO: Add functionalty to Login button
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formState.currentState!.validate()) {
+                            buildLoading(context);
+                            await Future.delayed(const Duration(
+                              seconds: 1,
+                              milliseconds: 50,
+                            ));
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
