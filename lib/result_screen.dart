@@ -5,12 +5,14 @@ import 'constant/colors.dart';
 
 class ResultScreen extends StatelessWidget {
   final String code;
+  final String macAddres;
   final Function() closeScreen;
 
   const ResultScreen({
     super.key,
     required this.code,
     required this.closeScreen,
+    required this.macAddres,
   });
 
   @override
@@ -72,6 +74,19 @@ class ResultScreen extends StatelessWidget {
                 letterSpacing: 1,
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Device Mac Address is: $macAddres',
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.black87,
+                fontSize: 16,
+                letterSpacing: 1,
+              ),
+            ),
+
             const SizedBox(
               height: 10,
             ),

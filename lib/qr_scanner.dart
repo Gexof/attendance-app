@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:attendance_app/result_screen.dart';
 import 'package:attendance_app/widgets/qr_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:mac_address/mac_address.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import 'constant/colors.dart';
@@ -109,16 +112,20 @@ class _QrScannerState extends State<QrScanner> {
                     MobileScanner(
                       controller: controller,
                       allowDuplicates: true,
-                      onDetect: (barcode, args) {
+                      onDetect: (barcode, args) async {
                         if (!isScanCompleted) {
                           String code = barcode.rawValue ?? '---';
                           isScanCompleted = true;
+                          String macAddress;
+                          macAddress = await GetMac.macAddress;
+                          log('$macAddress');
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => ResultScreen(
                                 closeScreen: closeScreen,
                                 code: code,
+                                macAddres: macAddress,
                               ),
                             ),
                           );
