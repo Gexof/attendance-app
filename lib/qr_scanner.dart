@@ -33,6 +33,7 @@ class _QrScannerState extends State<QrScanner> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           actions: [
+            // Open Flash
             IconButton(
               onPressed: () {
                 setState(() {
@@ -45,6 +46,7 @@ class _QrScannerState extends State<QrScanner> {
                 color: isFlashOn ? primaryColor : greyColor,
               ),
             ),
+            // Front Camera
             IconButton(
               onPressed: () {
                 setState(() {
@@ -120,7 +122,6 @@ class _QrScannerState extends State<QrScanner> {
                               ),
                             ),
                           );
-                          print(code);
                         }
                       },
                     ),

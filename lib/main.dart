@@ -1,5 +1,6 @@
 import 'package:attendance_app/login_screen.dart';
 import 'package:attendance_app/qr_scanner.dart';
+import 'package:attendance_app/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -42,7 +43,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: const SplashScreen(),
     );
   }
 }
